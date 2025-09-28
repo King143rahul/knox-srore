@@ -1,0 +1,5 @@
+{
+  "name": "Knox's Store",
+  "description": "An online store for selling digital goods. Products are delivered manually via WhatsApp after UPI payment verification.",
+  "requestFramePermissions": []
+}
