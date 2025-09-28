@@ -1,3 +1,6 @@
+// DEPRECATED: This component was part of the initial static checkout page.
+// Its functionality has been replaced by the more advanced and interactive CheckoutModal.
+// This file is no longer in use.
 
 import React, { useState } from 'react';
 import { WhatsappIcon } from './icons/WhatsappIcon';

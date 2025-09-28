@@ -43,27 +43,30 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, price, up
     
     setIsSubmitting(true);
     
-    const additionalInfo = product.requiresInput
-      ? `${product.requiresInput.label}: *${additionalInput}*`
-      : '';
+    // Add a short delay to make the loading feedback more visible and improve UX
+    setTimeout(() => {
+        const additionalInfo = product.requiresInput
+          ? `${product.requiresInput.label}: *${additionalInput}*`
+          : '';
 
-    const message = `
-New Order Details:
--------------------
-Product: *${product.name}*
-Price: *₹${price}*
-${additionalInfo ? additionalInfo + '\n' : ''}Customer Name: ${name}
-Delivery WhatsApp: ${whatsapp}
-UTR/Transaction ID: *${utr}*
--------------------
-Please verify the payment and deliver the product.
-    `.trim().replace(/^\s*\n/gm, "");
+        const message = `
+    New Order Details:
+    -------------------
+    Product: *${product.name}*
+    Price: *₹${price}*
+    ${additionalInfo ? additionalInfo + '\n' : ''}Customer Name: ${name}
+    Delivery WhatsApp: ${whatsapp}
+    UTR/Transaction ID: *${utr}*
+    -------------------
+    Please verify the payment and deliver the product.
+        `.trim().replace(/^\s*\n/gm, "");
 
-    const whatsappUrl = `https://wa.me/${STORE_OWNER_WHATSAPP}?text=${encodeURIComponent(message)}`;
-    
-    window.open(whatsappUrl, '_blank');
-    
-    setSubmitted(true);
+        const whatsappUrl = `https://wa.me/${STORE_OWNER_WHATSAPP}?text=${encodeURIComponent(message)}`;
+        
+        window.open(whatsappUrl, '_blank');
+        
+        setSubmitted(true);
+    }, 1000);
   };
 
   return (

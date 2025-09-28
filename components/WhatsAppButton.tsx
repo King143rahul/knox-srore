@@ -1,3 +1,7 @@
+// DEPRECATED: This component rendered a floating WhatsApp button.
+// Its functionality has been moved into the main Header component as a "Support" link
+// for a cleaner UI. This file is no longer in use.
+
 import React from 'react';
 import { WhatsappIcon } from './icons/WhatsappIcon';
 import { STORE_OWNER_WHATSAPP, WHATSAPP_PREDEFINED_MESSAGE } from '../constants';
