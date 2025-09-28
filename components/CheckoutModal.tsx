@@ -31,7 +31,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ product, price, up
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const upiUrl = encodeURIComponent(`upi://pay?pa=${upiId}&pn=KnoxsStore&am=${price}&cu=INR&tn=Order for ${product.name}`);
+  const rawUpiUrl = `upi://pay?pa=${upiId}&pn=KnoxsStore&am=${price}&cu=INR&tn=Order for ${product.name}`;
+  const upiUrl = encodeURIComponent(rawUpiUrl);
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${upiUrl}&qzone=1&color=6366f1&bgcolor=e2e8f0`;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -101,12 +102,27 @@ Please verify the payment and deliver the product.
                     <div className="p-4 bg-slate-700/50 rounded-lg text-center">
                         <h3 className="text-lg font-semibold text-indigo-400 flex items-center justify-center">
                             <span className="flex items-center justify-center w-6 h-6 bg-indigo-600 text-white rounded-full text-sm mr-3">1</span>
-                            Scan to Pay
+                            Scan or Click to Pay
                         </h3>
                         <div className="mt-4 bg-slate-200 rounded-lg p-2 inline-block shadow-md">
                            <img src={qrCodeUrl} alt={`UPI QR Code for ${price} INR`} width="200" height="200" className="rounded-md" />
                         </div>
-                        <p className="text-xs text-slate-400 mt-2">Pay ₹{price} using any UPI app</p>
+                         <p className="text-xs text-slate-400 mt-2">Pay ₹{price} by scanning with any UPI app</p>
+                        
+                        <div className="mt-4">
+                            <a 
+                                href={rawUpiUrl} 
+                                className="inline-flex items-center justify-center w-full sm:w-auto bg-violet-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-violet-700 transition-colors duration-300 shadow-md hover:shadow-lg"
+                                aria-label={`Pay ${price} via UPI`}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                                    <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
+                                </svg>
+                                Click to Pay ₹{price}
+                            </a>
+                            <p className="text-xs text-slate-500 mt-2">(Recommended on mobile)</p>
+                        </div>
                     </div>
 
                     <div className="p-4 bg-slate-700/50 rounded-lg">
